@@ -53,12 +53,14 @@ async def check_is_full_amount_gt_invested_amount(
     charity_project: CharityProject,
     obj_in: CharityProjectUpdate
 ) -> None:
-    if obj_in.full_amount:
-        if obj_in.full_amount < charity_project.invested_amount:
-            raise HTTPException(
-                status_code=HTTPStatus.BAD_REQUEST,
-                detail='Нельзя Установить Общую сумму ниже накопленной!'
-            )
+    if not obj_in.full_amount:
+        return None
+    
+    if obj_in.full_amount < charity_project.invested_amount:
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail='Нельзя Установить Общую сумму ниже накопленной!'
+        )
 
 
 async def check_is_closed_project(

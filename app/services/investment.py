@@ -14,20 +14,28 @@ async def check_is_not_full_amount(model, session) -> List:
     )
     return investments.scalars().all()
 
+@staticmethod
+def transfer(transfer_first, transfer_second, session):
+    transfer_first.invested_amount += (
+        transfer_second.full_amount - transfer_second.invested_amount
+    )
+    transfer_second.invested_amount = transfer_second.full_amount
+    transfer_second.fully_invested = True
+    transfer_second.close_date = datetime.datetime.utcnow()
+    if transfer_first.full_amount == transfer_first.invested_amount:
+        transfer_first.fully_invested = True
+        transfer_first.close_date = datetime.datetime.utcnow()
+    
+
 
 async def transfer_invested_amount_lt(
         transfer_to, transfer_from, session
 ):
-    transfer_to.invested_amount += (
-        transfer_from.full_amount - transfer_from.invested_amount
+    transfer(
+        transfer_first=transfer_to,
+        transfer_second=transfer_from,
+        session=session
     )
-    transfer_from.invested_amount = transfer_from.full_amount
-    transfer_from.fully_invested = True
-    transfer_from.close_date = datetime.datetime.utcnow()
-    if transfer_to.full_amount == transfer_to.invested_amount:
-        transfer_to.fully_invested = True
-        transfer_to.close_date = datetime.datetime.utcnow()
-
     session.add(transfer_to)
     session.add(transfer_from)
     await session.commit()
@@ -38,15 +46,11 @@ async def transfer_invested_amount_lt(
 async def transfer_invested_amount_gt(
         transfer_to, transfer_from, session
 ):
-    transfer_from.invested_amount += (
-        transfer_to.full_amount - transfer_to.invested_amount
+    transfer(
+        transfer_first=transfer_from,
+        transfer_second=transfer_to,
+        session=session
     )
-    transfer_to.invested_amount = transfer_to.full_amount
-    transfer_to.fully_invested = True
-    transfer_to.close_date = datetime.datetime.utcnow()
-    if transfer_from.full_amount == transfer_from.invested_amount:
-        transfer_from.fully_invested = True
-        transfer_from.close_date = datetime.datetime.utcnow()
     session.add(transfer_to)
     session.add(transfer_from)
     await session.commit()

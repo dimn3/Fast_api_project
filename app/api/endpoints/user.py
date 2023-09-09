@@ -32,5 +32,5 @@ router.include_router(
 def delete_user(id: str):
     raise HTTPException(
         status_code=HTTPStatus.METHOD_NOT_ALLOWED,
-        detail="Удаление пользователей запрещено!"
+        detail='Удаление пользователей запрещено!'
     )

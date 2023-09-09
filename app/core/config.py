@@ -1,11 +1,12 @@
 from typing import Optional
+
 from pydantic import BaseSettings, EmailStr
 
 
 class Settings(BaseSettings):
     app_title: str = 'QRkot'
     description: str = 'Благотворительный фонд поддержки котиков'
-    database_url: str = 'sqlite+aiosqlite:///./QRKot.db'
+    database_url: str = 'sqlite+aiosqlite:///./qrkot.db'
     secret: str = 'секретное слово'
     first_superuser_email: Optional[EmailStr] = None
     first_superuser_password: Optional[str] = None
