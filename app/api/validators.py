@@ -54,7 +54,7 @@ async def check_is_full_amount_gt_invested_amount(
     obj_in: CharityProjectUpdate
 ) -> None:
     if not obj_in.full_amount:
-        return None
+        return
 
     if obj_in.full_amount < charity_project.invested_amount:
         raise HTTPException(
