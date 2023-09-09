@@ -14,6 +14,7 @@ async def check_is_not_full_amount(model, session) -> List:
     )
     return investments.scalars().all()
 
+
 @staticmethod
 def transfer(transfer_first, transfer_second, session):
     transfer_first.invested_amount += (
@@ -25,7 +26,6 @@ def transfer(transfer_first, transfer_second, session):
     if transfer_first.full_amount == transfer_first.invested_amount:
         transfer_first.fully_invested = True
         transfer_first.close_date = datetime.datetime.utcnow()
-    
 
 
 async def transfer_invested_amount_lt(
