@@ -6,7 +6,7 @@ from app.core.user import current_superuser, current_user
 from app.crud.donation import donation_crud
 from app.models import User
 from app.schemas.donation import DonationAdmin, DonationCreate, DonationDB
-from cat_charity_fund.app.services.investment import investment
+from cat_charity_fund.app.services.investment_service import investment
 
 router = APIRouter()
 
