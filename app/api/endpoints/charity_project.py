@@ -1,13 +1,11 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.validators import (
-    check_charity_project_exists,
-    check_charity_project_name_duplicate,
-    check_is_closed_project,
-    check_is_full_amount_gt_invested_amount,
-    check_is_invested_amount_zero
-)
+from app.api.validators import (check_charity_project_exists,
+                                check_charity_project_name_duplicate,
+                                check_is_closed_project,
+                                check_is_full_amount_gt_invested_amount,
+                                check_is_invested_amount_zero)
 from app.core.db import get_async_session
 from app.core.user import current_superuser
 from app.crud.charity_project import charity_project_crud
