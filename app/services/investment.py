@@ -15,7 +15,6 @@ async def check_is_not_full_amount(model, session) -> List:
     return investments.scalars().all()
 
 
-@staticmethod
 def transfer(transfer_first, transfer_second, session):
     transfer_first.invested_amount += (
         transfer_second.full_amount - transfer_second.invested_amount
