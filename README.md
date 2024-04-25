@@ -37,9 +37,9 @@
   pip install -r requirements.txt
   ```
 
-* Создать переменные окружения (файл cat_charity_fund/.env). Пример заполнения файла:
+* Создать переменные окружения (файл .env). Пример заполнения файла:
   ```
-  APP_TITLE=QRKot
+  APP_TITLE=Название
   DESCRIPTION=Описание
   DATABASE_URL=SQLITE+AIOSQLITE:///./FASTAPI.DB
   SECRET=SECRET
