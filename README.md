@@ -40,7 +40,7 @@
 * Создать переменные окружения (файл cat_charity_fund/.env). Пример заполнения файла:
   ```
   APP_TITLE=QRKot
-  DESCRIPTION=Фонд поддержки котиков
+  DESCRIPTION=Описание
   DATABASE_URL=SQLITE+AIOSQLITE:///./FASTAPI.DB
   SECRET=SECRET
   FIRST_SUPERUSER_EMAIL=test@test.ru
